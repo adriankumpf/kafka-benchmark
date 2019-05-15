@@ -9,19 +9,17 @@ description = "A tool to benchmark Kafka clusters"
 keywords = ["kafka", "rdkafka", "benchmark"]
 
 [dependencies]
-clap = "2.0.0"
-env_logger = "0.5.0"
-futures = "0.1.0"
-log = "0.4.0"
-rand = "0.4.0"
-# rdkafka = "0.14.0"
-rdkafka = { git = "https://github.com/fede1024/rust-rdkafka.git" }
-serde = "1.0.0"
-serde_derive = "1.0.0"
-serde_yaml = "0.7.0"
+clap = "2.33.0"
+env_logger = "0.6.1"
+futures = "0.1.27"
+log = "0.4.6"
+rand = "0.6.5"
+rdkafka = "0.21.0"
+serde = "1.0.91"
+serde_derive = "1.0.91"
+serde_yaml = "0.8.9"
 
 [features]
 default = []
-
 ssl = ["rdkafka/ssl"]
 sasl = ["rdkafka/sasl", "ssl"]

@@ -1,4 +1,4 @@
-use rand::{self, Rng};
+use rand::{distributions::Standard, thread_rng, Rng};
 
 pub struct CachedMessages(Vec<Vec<u8>>);
 
@@ -6,9 +6,9 @@ impl CachedMessages {
     pub fn new(msg_size: u64, cache_size: u64) -> CachedMessages {
         let messages = (0..(cache_size / msg_size))
             .map(|_| {
-                rand::thread_rng()
-                    .gen_iter::<u8>()
-                    .map(|v| v % 86 + 40)
+                thread_rng()
+                    .sample_iter(&Standard)
+                    .map(|v: u8| v % 86 + 40)
                     .take(msg_size as usize)
                     .collect::<Vec<u8>>()
             })
