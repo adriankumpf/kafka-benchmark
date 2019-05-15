@@ -49,6 +49,7 @@ struct ProducerScenarioFileConfig {
     producer_type: Option<ProducerType>,
     message_size: Option<u64>,
     message_count: Option<u64>,
+    partition_count: Option<i32>,
     topic: Option<String>,
     producer_config: Option<HashMap<String, String>>,
 }
@@ -68,6 +69,7 @@ pub struct ProducerScenario {
     pub producer_type: ProducerType,
     pub message_size: u64,
     pub message_count: u64,
+    pub partition_count: i32,
     pub topic: String,
     pub producer_config: HashMap<String, String>,
 }
@@ -113,6 +115,12 @@ impl ProducerScenario {
                 &default.message_count,
                 "message_count",
             ),
+            partition_count: or_expect(
+                &scenario.partition_count,
+                &default.partition_count,
+                "partition_count",
+            ),
+
             topic: or_expect(&scenario.topic, &default.topic, "topic"),
             producer_config,
         }

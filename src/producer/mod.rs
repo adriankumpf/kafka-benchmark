@@ -75,7 +75,7 @@ fn base_producer_thread(
         loop {
             match producer.send::<[u8], [u8]>(
                 BaseRecord::to(&scenario.topic)
-                    .partition(count as i32 % 3)
+                    .partition(count as i32 % scenario.partition_count)
                     .payload(content),
             ) {
                 Err((KafkaError::MessageProduction(RDKafkaError::QueueFull), _)) => {
@@ -142,7 +142,7 @@ fn future_producer_thread(
         futures.push(
             producer.send::<[u8], [u8]>(
                 FutureRecord::to(&scenario.topic)
-                    .partition(count as i32 % 3)
+                    .partition(count as i32 % scenario.partition_count)
                     .payload(content),
                 -1,
             ),
